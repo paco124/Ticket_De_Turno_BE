@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticket_De_Turno_BE", "Ticket_De_Turno_BE\Ticket_De_Turno_BE.csproj", "{B01A90FD-9EF9-4A5D-85EC-FFE582A05261}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B01A90FD-9EF9-4A5D-85EC-FFE582A05261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B01A90FD-9EF9-4A5D-85EC-FFE582A05261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B01A90FD-9EF9-4A5D-85EC-FFE582A05261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B01A90FD-9EF9-4A5D-85EC-FFE582A05261}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E1B4A0E-F7ED-43AF-8545-A7B75638C0A5}
+	EndGlobalSection
+EndGlobal
