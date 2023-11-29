@@ -25,14 +25,14 @@
             public int ID_ROL { get; set; }
         }
 
-        public class getUser
-        {
-            public string? ID_USER { get; set; }
-            public string? USER_NAME { get; set; }
-        }
+        //public class getUser
+        //{
+        //    public string? ID_USER { get; set; }
+        //    public string? USER_NAME { get; set; }
+        //}
         public class deleteUser
         {
-            public string USER_NAME { get; set; }
+            public int id { get; set; }
         }
 
         public class getUserAdmin
@@ -55,6 +55,49 @@
             public DateTime RESERVACION { get; set; }
             public string USUARIO { get; set; }
             public string ESTATUS { get; set; }
+            public int NO_TURNO {  get; set; }
+        }
+
+        public class ID_data
+        {
+            public int ID { get; set; }
+        }
+        public class getRoles : ID_data
+        {
+            public string ROL { get; set; }
+        }
+        public class getAllUsers : ID_data
+        {
+            public string USER_NAME { get; set; }
+            public string ROL { get; set; }
+        }
+        public class updateUser:ID_data
+        {
+            public string USER_NAME { get; set; }
+            public int ID_ROL { get; set; }
+        }
+        public class setEstatus : ID_data
+        {
+            public string curp { get; set; }
+        }
+        public class getDataChart1
+        {
+            public int RESUELTOS { get; set; }
+            public int PENDIENTES { get; set; }
+            public int CANCELADOS { get; set; }
+            public int TOTAL {  get; set; }
+            public DateTime FECHA { get; set; }
+        }
+
+        public class getDataChart2
+        {
+            public string  ASUNTO { get; set; }
+            public int CONTEO { get; set; }
+        }
+
+        public class insertCRUD
+        {
+            public string DESCRIPCION { get; set; }
         }
     }
 }

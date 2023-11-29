@@ -30,7 +30,7 @@ namespace Ticket_De_Turno_BE.Controllers.Admin
 
         [HttpPost]
         [Route("getUser")]
-        public ActionResult getUser(getUser data)
+        public ActionResult getUser(ID_data data)
         {
             string apiName = "getUser";
 
@@ -45,7 +45,7 @@ namespace Ticket_De_Turno_BE.Controllers.Admin
         }
         [HttpPost]
         [Route("updateUser")]
-        public ActionResult updateUser(insertUsers data)
+        public ActionResult updateUser(updateUser data)
         {
             string apiName = "updateUser";
 
@@ -84,6 +84,161 @@ namespace Ticket_De_Turno_BE.Controllers.Admin
             try
             {
                 return Ok(new { apiName, msg = "OK", data = methods.getCitasForAdmin(), error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName, msg = ex.Message, error = true });
+            }
+        }
+        [HttpGet]
+        [Route("getRoles")]
+        public ActionResult getRoles()
+        {
+            string apiName = "getRoles";
+
+            try
+            {
+                return Ok(new { apiName, msg = "OK", data = methods.getRoles(), error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName, msg = ex.Message, error = true });
+            }
+        }
+
+        [HttpGet]
+        [Route("getAllUsers")]
+        public ActionResult getAllUsers()
+        {
+            string apiName = "getAllUsers";
+
+            try
+            {
+                return Ok(new { apiName, msg = "OK", data = methods.getAllUsers(), error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName, msg = ex.Message, error = true });
+            }
+        }
+
+        [HttpPost]
+        [Route("setEstatus")]
+        public ActionResult setEstatus(setEstatus data)
+        {
+            string apiName = "setEstatus";
+
+            try
+            {
+                return Ok(new { apiName, msg = "OK", data = methods.setEstatus(data), error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName, msg = ex.Message, error = true });
+            }
+        }
+
+        [HttpGet]
+        [Route("getDataChart1")]
+        public ActionResult getDataChart1()
+        {
+            string apiName = "getDataChart1";
+
+            try
+            {
+                return Ok(new { apiName, msg = "OK", data = methods.getDataChart1(), error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName, msg = ex.Message, error = true });
+            }
+        }
+
+        [HttpGet]
+        [Route("getDataChart2")]
+        public ActionResult getDataChart2()
+        {
+            string apiName = "getDataChart2";
+
+            try
+            {
+                return Ok(new { apiName, msg = "OK", data = methods.getDataChart2(), error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName, msg = ex.Message, error = true });
+            }
+        }
+
+        [HttpPost]
+        [Route("insertAsunto")]
+        public ActionResult insertAsunto(insertCRUD data)
+        {
+            string apiName = "insertAsunto";
+
+            try
+            {
+                return Ok(new { apiName, msg = "OK", data = methods.insertAsunto(data), error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName, msg = ex.Message, error = true });
+            }
+        }
+        [HttpPost]
+        [Route("insertEstatus")]
+        public ActionResult insertEstatus(insertCRUD data)
+        {
+            string apiName = "insertEstatus";
+
+            try
+            {
+                return Ok(new { apiName, msg = "OK", data = methods.insertEstatus(data), error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName, msg = ex.Message, error = true });
+            }
+        }
+        [HttpPost]
+        [Route("insertMunicipio")]
+        public ActionResult insertMunicipio(insertCRUD data)
+        {
+            string apiName = "insertMunicipio";
+
+            try
+            {
+                return Ok(new { apiName, msg = "OK", data = methods.insertMunicipio(data), error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName, msg = ex.Message, error = true });
+            }
+        }
+        [HttpPost]
+        [Route("insertNivel")]
+        public ActionResult insertNivel(insertCRUD data)
+        {
+            string apiName = "insertNivel";
+
+            try
+            {
+                return Ok(new { apiName, msg = "OK", data = methods.insertNivel(data), error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName, msg = ex.Message, error = true });
+            }
+        }
+        [HttpPost]
+        [Route("insertRol")]
+        public ActionResult insertRol(insertCRUD data)
+        {
+            string apiName = "insertRol";
+
+            try
+            {
+                return Ok(new { apiName, msg = "OK", data = methods.insertRol(data), error = false });
             }
             catch (Exception ex)
             {

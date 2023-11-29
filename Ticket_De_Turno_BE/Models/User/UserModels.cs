@@ -58,6 +58,7 @@
             public DateTime RESERVACION { get; set; }
             public string USUARIO { get; set; }
             public string ESTATUS { get; set; }
+            public int NO_TURNO { get; set; }
         }
         public class cancelarCita : postUser
         {
@@ -80,5 +81,10 @@
             public string asunto { get; set; }
             public DateTime reservacion { get; set; }
         }
-     }
+        public class getTurno
+        {
+            public int NO_TURNO { get; set; }
+            public int ID_MUNICIPIO { get; set; }
+        }
+    }
     }

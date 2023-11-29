@@ -1,6 +1,7 @@
 ﻿using static Ticket_De_Turno_BE.Models.User.UserModels;
 using Ticket_De_Turno_BE.Services;
 using Microsoft.AspNetCore.Localization;
+using static Ticket_De_Turno_BE.Models.Login.LoginModels;
 
 namespace Ticket_De_Turno_BE.Methods.User
 {
@@ -57,22 +58,44 @@ namespace Ticket_De_Turno_BE.Methods.User
         }
         public dynamic SaveCita(saveCita data)
         {
-            string curp = data.CURP != null && data.CURP.Any() ? string.Join("','", data.CURP) : "";
-            string nombre = data.NOMBRE != null && data.NOMBRE.Any() ? string.Join("','", data.NOMBRE) : "";
-            string paterno = data.PATERNO != null && data.PATERNO.Any() ? string.Join("','", data.PATERNO) : "";
-            string materno = data.MATERNO != null && data.MATERNO.Any() ? string.Join("','", data.MATERNO) : "";
-            string telefono = data.TELEFONO != null && data.TELEFONO.Any() ? string.Join("','", data.TELEFONO) : "";
-            int nivel = data.NIVEL;
-            int municipio = data.MUNICIPIO;
-            int asunto = data.ASUNTO;
-            string fecha_reservada = data.FECHARESERVADA != null && data.FECHARESERVADA.Any() ? string.Join("','", data.FECHARESERVADA) : "";
-            int user = data.USER;
             try
             {
+                string curp = data.CURP != null && data.CURP.Any() ? string.Join("','", data.CURP) : "";
+                string nombre = data.NOMBRE != null && data.NOMBRE.Any() ? string.Join("','", data.NOMBRE) : "";
+                string paterno = data.PATERNO != null && data.PATERNO.Any() ? string.Join("','", data.PATERNO) : "";
+                string materno = data.MATERNO != null && data.MATERNO.Any() ? string.Join("','", data.MATERNO) : "";
+                string telefono = data.TELEFONO != null && data.TELEFONO.Any() ? string.Join("','", data.TELEFONO) : "";
+                int nivel = data.NIVEL;
+                int municipio = data.MUNICIPIO;
+                int asunto = data.ASUNTO;
+                string fecha_reservada = data.FECHARESERVADA != null && data.FECHARESERVADA.Any() ? string.Join("','", data.FECHARESERVADA) : "";
+                int user = data.USER;
+                var qryTurno = $@"WITH DatosOrdenados AS (
+                                SELECT ID_MUNICIPIO, NO_TURNO,
+                                    ROW_NUMBER() OVER (PARTITION BY ID_MUNICIPIO ORDER BY NO_TURNO DESC) AS NumFila
+                                FROM CITAS
+                            )
+                            SELECT
+                                ID_MUNICIPIO,NO_TURNO
+                            FROM DatosOrdenados
+                            WHERE NumFila = 1
+                            AND ID_MUNICIPIO ={municipio}";
+                var turno = SQLService.SelectMethod<getTurno>(qryTurno, ConnectionService.GetConnectionString()).FirstOrDefault();
+                int noTurno = 0;
+                if (turno == null)
+                {
+                    noTurno = 1;
+                }
+                else
+                {
+                    noTurno = (int)turno.NO_TURNO + 1;
+                }
+                
+
                 var qry = $@"INSERT INTO CITAS(CURP,NOMBRE,PATERNO,MATERNO,TELEFONO,ID_NIVEL,ID_MUNICIPIO,
-                             ID_ASUNTO,FECHA_CARGA,FECHA_RESERVADA, ID_USER,ID_ESTATUS) VALUES 
+                             ID_ASUNTO,FECHA_CARGA,FECHA_RESERVADA, ID_USER,ID_ESTATUS,NO_TURNO) VALUES 
                              ('{curp}','{nombre}','{paterno}','{materno}',{telefono},{nivel},{municipio},
-                             {asunto},GETDATE(),'{fecha_reservada}',{user},2)";
+                             {asunto},GETDATE(),'{fecha_reservada}',{user},2,{noTurno})";
                 return SQLService.InsertMethod(qry, ConnectionService.GetConnectionString());
             }
             catch
@@ -87,7 +110,7 @@ namespace Ticket_De_Turno_BE.Methods.User
             {
                 var qry = $@"SELECT CURP,NOMBRE,PATERNO,MATERNO,TELEFONO,N.DESCRIPCION AS NIVEL,
                                 M.MUNICIPIO,A.ASUNTO,FECHA_CARGA AS FECHA,
-                                FECHA_RESERVADA AS RESERVACION, U.USER_NAME AS USUARIO, E.ESTATUS
+                                FECHA_RESERVADA AS RESERVACION, U.USER_NAME AS USUARIO, E.ESTATUS,NO_TURNO
                                 FROM CITAS C
                                 LEFT JOIN NIVELES N
                                 ON C.ID_NIVEL = N.ID_NIVEL
